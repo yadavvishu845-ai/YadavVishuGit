@@ -58,9 +58,9 @@ public class Test extends BasePageTest  {
 
 
         Actions builder = new Actions(driver);
-//            WebElement from = driver.findElement(By.id("column-b"));
-//            WebElement to = driver.findElement(By.id("column-a"));
-//            builder.dragAndDrop(from, to).build().perform();
+            WebElement from = driver.findElement(By.id("column-b"));
+            WebElement to = driver.findElement(By.id("column-a"));
+            builder.dragAndDrop(from, to).build().perform();
 
 
             Actions builder1 = new Actions(driver);
