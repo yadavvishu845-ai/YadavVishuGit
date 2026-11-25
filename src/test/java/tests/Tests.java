@@ -51,9 +51,8 @@ public class Tests extends BaseClass{
         driver.findElement(By.xpath("//div[@id='app']/div/div/header/div/div[3]/ul/li/span")).click();
         driver.findElement(By.linkText("Logout")).click();
     }
-
     @Test
-    public void dragAndDropTest(){
+    public void dragAndDropTest1(){
         // creates a toggle for the given test, adds all log events under it
         ExtentTest test1 = extent.createTest("MyFirstTestOne", "Sample Test Demo");
         test1.log(Status.INFO,"Clicking on View Tab");
