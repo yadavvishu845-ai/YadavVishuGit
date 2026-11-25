@@ -22,8 +22,9 @@ public class BaseClass extends ExtentReportsDemo {
             caps.setCapability("appium:udid", "emulator-5554");
             caps.setCapability("appium:automationName", "UiAutomator2");
             caps.setCapability("appium:newCommandTimeout", 60);
-            caps.setCapability("browserName", "Chrome");
-            caps.setCapability("appium:chromedriverAutodownload", true);
+            caps.setCapability("appium:app", "C:/Users/ASUS/Downloads/ApiDemos-debug (1).apk");
+            //caps.setCapability("browserName", "Chrome");
+            //caps.setCapability("appium:chromedriverAutodownload", true);
 
             URL url = new URL("http://127.0.0.1:4723/");
 
