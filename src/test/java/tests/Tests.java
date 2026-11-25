@@ -2,6 +2,12 @@ package tests;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
+import io.appium.java_client.remote.AppiumWebElement;
+import org.openqa.selenium.*;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import java.util.Map;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -16,6 +22,7 @@ import java.time.Duration;
 
 
 public class Tests extends BaseClass{
+
 
     @Test
     public void testOne(){
@@ -54,6 +61,41 @@ public class Tests extends BaseClass{
         driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index");
         driver.findElement(By.xpath("//div[@id='app']/div/div/header/div/div[3]/ul/li/span")).click();
         driver.findElement(By.linkText("Logout")).click();
+    }
+    @Test
+    public void dragAndDropTest1(){
+        // creates a toggle for the given test, adds all log events under it
+        ExtentTest test1 = extent.createTest("MyFirstTestOne", "Sample Test Demo");
+        test1.log(Status.INFO,"Clicking on View Tab");
+        driver.findElement(By.xpath("//android.widget.TextView[@content-desc='Views']")).click();
+        test1.log(Status.INFO,"Clicking on Drag And Drop Tab");
+        driver.findElement(By.xpath("//android.widget.TextView[@content-desc='Drag and Drop']")).click();
+        test1.log(Status.INFO,"Taking the Location Of Source");
+        WebElement source = driver.findElement(By.id("io.appium.android.apis:id/drag_dot_1"));
+        test1.log(Status.INFO,"Taking the Location Of Destination");
+        WebElement target = driver.findElement(By.id("io.appium.android.apis:id/drag_dot_2"));
+
+
+        test1.log(Status.INFO,"Getting the Id Of the Source for Mobile Gesture Command");
+        String sourceId = ((AppiumWebElement) source).getId();
+
+        test1.log(Status.INFO,"Method for getting exact center point of the target");
+        Rectangle t = target.getRect();
+        int startX = t.getX() + t.getWidth() / 2;
+        int startY = t.getY() + t.getWidth() / 2;
+
+        test1.log(Status.INFO,"Performing the Drag and  Drop Action");
+        driver.executeScript("mobile: dragGesture", Map.of(
+                "elementId", sourceId,
+                "endX", startX + 150,
+                "endY", startY,
+                "speed", 500
+        ));
+
+        test1.log(Status.INFO,"Getting the text of Drop Action being Completed");
+        String result = driver.findElement(By.id("io.appium.android.apis:id/drag_result_text")).getText();
+        Assert.assertEquals(result, "Dropped!");
+        test1.log(Status.PASS,"Drag And Drop Test passed");
         //driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
     } @org.testng.annotations.Test
     public void DragDrop(){
